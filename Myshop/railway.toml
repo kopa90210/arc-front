@@ -1,0 +1,20 @@
+# Railway Configuration
+# This file provides Railway with deployment instructions
+
+[build]
+# Builder: heroku (uses buildpacks) or nixpacks (faster, more optimized)
+builder = "nixpacks"
+
+# Commands for building the application
+[build.env]
+# Ensure production build
+DOTNET_ENVIRONMENT = "Production"
+
+[start]
+# Command to start the application
+cmd = "dotnet Myshop.Api.dll"
+
+[env]
+# Environment variables for Railway
+ASPNETCORE_ENVIRONMENT = "Production"
+ASPNETCORE_URLS = "http://+:8080"

@@ -1,0 +1,4 @@
+# Railway Procfile
+# Simple process definition for Railway
+
+web: dotnet Myshop.Api.dll

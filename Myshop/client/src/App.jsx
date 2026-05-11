@@ -31,22 +31,10 @@ import AdminProducts from "./pages/AdminProducts";
 // import api from "./services/api";
 
 function App() {
-  // const [products, setProducts] = useState([]);
-
-  // useEffect(() => {
-  //   api
-  //     .get("/products")
-  //     .then((res) => setProducts(res.data.items || []))
-  //     .catch((err) => console.error("Error fetching products:", err));
-  // }, []);
-
-  // document.addEventListener("click", () => {
-  //   window.userInteracted = true;
-  // }, { once: true });
-
   return (
     <Router>
       <Routes>
+      
         {/* الصفحة الرئيسية → Login (default) */}
         <Route path="/" element={<Login />} />
         <Route path="/user" element={<ProtectedRoute allowedRoles={["User", "Admin"]}> <UserLayout /></ProtectedRoute>}>

@@ -6,30 +6,30 @@ import { withHost } from "../utils/outfitHelpers";
 
 // ── Icons (SVG placeholders) ────────────────────────────────────────────────
 const IconDashboard = () => <span>📊</span>;
-const IconOrders    = () => <span>📦</span>;
-const IconProducts  = () => <span>🏷️</span>;
+const IconOrders = () => <span>📦</span>;
+const IconProducts = () => <span>🏷️</span>;
 const IconAnalytics = () => <span>📈</span>;
-const IconMessages  = () => <span>✉️</span>;
-const IconPromos    = () => <span>🏷️</span>;
-const IconSettings  = () => <span>⚙️</span>;
+const IconMessages = () => <span>✉️</span>;
+const IconPromos = () => <span>🏷️</span>;
+const IconSettings = () => <span>⚙️</span>;
 
 const NAV_ITEMS = [
-  { label: "Dashboard",   icon: <IconDashboard /> },
-  { label: "Orders",      icon: <IconOrders /> },
-  { label: "Products",    icon: <IconProducts /> },
-  { label: "Analytics",   icon: <IconAnalytics /> },
-  { label: "Messages",    icon: <IconMessages />, badge: 4 },
-  { label: "Promotions",  icon: <IconPromos /> },
-  { label: "Settings",    icon: <IconSettings /> },
+  { label: "Dashboard", icon: <IconDashboard /> },
+  { label: "Orders", icon: <IconOrders /> },
+  { label: "Products", icon: <IconProducts /> },
+  { label: "Analytics", icon: <IconAnalytics /> },
+  { label: "Messages", icon: <IconMessages />, badge: 4 },
+  { label: "Promotions", icon: <IconPromos /> },
+  { label: "Settings", icon: <IconSettings /> },
 ];
 
 export default function VendorProfile() {
   const [profile, setProfile] = useState(null);
   const [loading, setLoading] = useState(true);
-  const [error, setError]     = useState("");
-  const [msg, setMsg]         = useState({ type: "", text: "" });
-  const [tab, setTab]         = useState("All Products");
-  
+  const [error, setError] = useState("");
+  const [msg, setMsg] = useState({ type: "", text: "" });
+  const [tab, setTab] = useState("All Products");
+
   // Dummy data for products (fallback if none loaded from API)
   const [products, setProducts] = useState([]);
 
@@ -76,11 +76,11 @@ export default function VendorProfile() {
 
     try {
       // NOTE: Ensure your vendorApi exports uploadCover
-      const res = await vendorApi.uploadCover?.(fd) 
-                  || await vendorApi.post("/vendors/profile/cover", fd, { headers: { 'Content-Type': 'multipart/form-data' }});
+      const res = await vendorApi.uploadCover?.(fd)
+        || await vendorApi.post("/vendors/profile/cover", fd, { headers: { 'Content-Type': 'multipart/form-data' } });
       setProfile(p => ({ ...p, coverImage: res.data?.coverImage || res.coverImage }));
       showMsg("success", "Cover image updated.");
-    } catch (err) {
+    } catch {
       showMsg("error", "Failed to upload cover.");
     }
   };
@@ -94,7 +94,7 @@ export default function VendorProfile() {
   );
 
   const coverUrl = profile?.coverImage ? withHost(profile.coverImage) : null;
-  const logoUrl  = profile?.storeLogo ? withHost(profile.storeLogo) : null;
+  const logoUrl = profile?.storeLogo ? withHost(profile.storeLogo) : null;
 
   return (
     <div className="vp-root">
@@ -103,7 +103,7 @@ export default function VendorProfile() {
         <div className="vp-logo">Maison Noir</div>
         <nav className="vp-nav">
           {NAV_ITEMS.map((item, i) => (
-            <button key={item.label} className={`vp-nav-item ${i===6 ? 'active' : ''}`}>
+            <button key={item.label} className={`vp-nav-item ${i === 6 ? 'active' : ''}`}>
               <span className="vp-nav-icon">{item.icon}</span>
               {item.label}
               {item.badge && <span className="vp-badge">{item.badge}</span>}
@@ -113,7 +113,7 @@ export default function VendorProfile() {
         <div className="vp-sidebar-footer">
           <div className="vp-sidebar-user">
             <div className="vp-sidebar-av">
-              {logoUrl ? <img src={logoUrl} alt="logo"/> : "MN"}
+              {logoUrl ? <img src={logoUrl} alt="logo" /> : "MN"}
             </div>
             <div className="vp-sidebar-name">{profile?.storeName || "Maison Noir"}</div>
             <span style={{ fontSize: 10, color: "#8A7F74" }}>▼</span>
@@ -123,10 +123,10 @@ export default function VendorProfile() {
 
       {/* ── Main Area ── */}
       <main className="vp-main">
-        
+
         {/* ── Center Content ── */}
         <section className="vp-center">
-          
+
           {/* Cover */}
           <div className="vp-cover">
             {coverUrl && <img src={coverUrl} alt="Cover" />}
@@ -140,7 +140,7 @@ export default function VendorProfile() {
           <div className="vp-profile-card">
             <div className="vp-avatar-wrap">
               <div className="vp-store-av">
-                {logoUrl ? <img src={logoUrl} alt="logo"/> : "MN"}
+                {logoUrl ? <img src={logoUrl} alt="logo" /> : "MN"}
               </div>
             </div>
 
@@ -171,9 +171,9 @@ export default function VendorProfile() {
           <div className="vp-stats">
             {[
               { val: profile?.productsCount || 156, lbl: "Products" },
-              { val: `${(profile?.followers || 2400) >= 1000 ? ((profile?.followers || 2400)/1000).toFixed(1)+'K' : (profile?.followers || 2400)}`, lbl: "Followers" },
+              { val: `${(profile?.followers || 2400) >= 1000 ? ((profile?.followers || 2400) / 1000).toFixed(1) + 'K' : (profile?.followers || 2400)}`, lbl: "Followers" },
               { val: <>{(profile?.avgRating || 4.8).toFixed(1)}<span className="vp-stat-star">★</span></>, lbl: "Rating" },
-              { val: `${(profile?.salesCount || 1200) >= 1000 ? ((profile?.salesCount || 1200)/1000).toFixed(1)+'K' : (profile?.salesCount || 1200)}`, lbl: "Sales" },
+              { val: `${(profile?.salesCount || 1200) >= 1000 ? ((profile?.salesCount || 1200) / 1000).toFixed(1) + 'K' : (profile?.salesCount || 1200)}`, lbl: "Sales" },
             ].map(s => (
               <div key={s.lbl} className="vp-stat-col">
                 <div className="vp-stat-val">{s.val}</div>
@@ -200,9 +200,9 @@ export default function VendorProfile() {
                     <div key={p.id || i} className="vp-product-card">
                       <div className="vp-product-thumb">
                         {p.imageUrl || p.ImageUrl ? (
-                           <img src={withHost(p.imageUrl || p.ImageUrl)} alt={p.name || p.Name} />
+                          <img src={withHost(p.imageUrl || p.ImageUrl)} alt={p.name || p.Name} />
                         ) : (
-                           <span className="vp-product-thumb-placeholder">👗</span>
+                          <span className="vp-product-thumb-placeholder">👗</span>
                         )}
                       </div>
                       <div className="vp-product-info">
@@ -225,7 +225,7 @@ export default function VendorProfile() {
                   ].map((p, i) => (
                     <div key={i} className="vp-product-card">
                       <div className="vp-product-thumb">
-                         <span className="vp-product-thumb-placeholder">👗</span>
+                        <span className="vp-product-thumb-placeholder">👗</span>
                       </div>
                       <div className="vp-product-info">
                         <div className="vp-product-name">{p.name}</div>
@@ -240,18 +240,18 @@ export default function VendorProfile() {
 
           {tab === "About" && (
             <div className="vp-about-area">
-               <div className="vp-about-field">
-                 <label>Store Description</label>
-                 <textarea rows={4} readOnly value={profile?.storeDescription || "Contemporary fashion house specializing in minimalist aesthetics and sustainable materials."} />
-               </div>
-               <div className="vp-about-field">
-                 <label>Tagline</label>
-                 <input type="text" readOnly value={profile?.tagline || ""} />
-               </div>
-               <div className="vp-about-field">
-                 <label>Address</label>
-                 <input type="text" readOnly value={profile?.address || ""} />
-               </div>
+              <div className="vp-about-field">
+                <label>Store Description</label>
+                <textarea rows={4} readOnly value={profile?.storeDescription || "Contemporary fashion house specializing in minimalist aesthetics and sustainable materials."} />
+              </div>
+              <div className="vp-about-field">
+                <label>Tagline</label>
+                <input type="text" readOnly value={profile?.tagline || ""} />
+              </div>
+              <div className="vp-about-field">
+                <label>Address</label>
+                <input type="text" readOnly value={profile?.address || ""} />
+              </div>
             </div>
           )}
 
@@ -259,7 +259,7 @@ export default function VendorProfile() {
 
         {/* ── Right Rail ── */}
         <aside className="vp-rail">
-          
+
           {/* Store Performance */}
           <div className="vp-rail-card">
             <div className="vp-rail-title">Store Performance</div>
@@ -286,7 +286,7 @@ export default function VendorProfile() {
                 <div className="vp-perf-lbl">Conversion</div>
               </div>
               <div className="vp-perf-stat">
-                <div className="vp-perf-val">${profile?.totalSales >= 1000 ? ((profile?.totalSales)/1000).toFixed(1)+'K' : (profile?.totalSales || '4.2K')}</div>
+                <div className="vp-perf-val">${profile?.totalSales >= 1000 ? ((profile?.totalSales) / 1000).toFixed(1) + 'K' : (profile?.totalSales || '4.2K')}</div>
                 <div className="vp-perf-lbl">Revenue</div>
               </div>
             </div>
@@ -307,7 +307,7 @@ export default function VendorProfile() {
             </p>
             <div className="vp-review-product">
               <div className="vp-review-product-thumb">👗</div>
-              <div className="vp-review-product-name">Purchased product &<br/>handbag to e.g.</div>
+              <div className="vp-review-product-name">Purchased product &<br />handbag to e.g.</div>
             </div>
           </div>
 

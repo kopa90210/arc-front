@@ -1,0 +1,89 @@
+# Build results
+[Dd]ebug/
+[Dd]ebugPublic/
+[Rr]elease/
+[Rr]eleases/
+x64/
+x86/
+[Ww][Ii][Nn]32/
+[Aa][Rr][Mm]/
+[Aa][Rr][Mm]64/
+bld/
+[Bb]in/
+[Oo]bj/
+[Ll]og/
+[Ll]ogs/
+_buildtmp*/
+
+# Visual Studio cache/options
+.vs/
+.vscode/
+!.vscode/extensions.json
+
+# User-specific files
+*.rsuser
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+# Rider IDE
+.idea/
+*.sln.iml
+
+# Environment variables (SENSITIVE - DO NOT COMMIT)
+appsettings.Production.json
+appsettings.Development.json
+appsettings.Development.Local.json
+*.local.json
+.env
+.env.local
+.env.*.local
+.env.production.local
+
+# Secrets
+secrets.json
+**/*.pfx
+**/*.p12
+
+# NuGet
+.nuget/
+*.nupkg
+*.snupkg
+packages/
+
+# Files built by Visual Studio
+*.sln.VisualStudioVersion
+*.suo
+
+# Test Results
+TestResults/
+*.trx
+*.coverage
+
+# Local database
+*.db
+*.sqlite
+*.sqlite3
+
+# Compiled Python
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Docker
+docker-compose.override.yml
+
+# IDE
+.vscode
+.vs
+.idea
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Temporary files
+tmp/
+temp/
+*.tmp
