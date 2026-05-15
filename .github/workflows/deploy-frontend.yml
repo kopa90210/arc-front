@@ -30,6 +30,24 @@ jobs:
           cd client
           npm ci
 
+      - name: Validate production API URL
+        shell: bash
+        env:
+          VITE_API_URL: ${{ secrets.VITE_API_URL }}
+        run: |
+          if [[ -z "$VITE_API_URL" ]]; then
+            echo "VITE_API_URL is empty. Set it to your backend URL, e.g. https://<service>.up.railway.app/api"
+            exit 1
+          fi
+          if [[ "$VITE_API_URL" == "https://api.railway.app"* ]]; then
+            echo "VITE_API_URL points to Railway platform API. Use your service URL instead."
+            exit 1
+          fi
+          if [[ "$VITE_API_URL" == *".railway.internal"* ]]; then
+            echo "VITE_API_URL uses a private Railway internal domain. Browsers cannot reach it."
+            exit 1
+          fi
+
       - name: Build
         run: |
           cd client

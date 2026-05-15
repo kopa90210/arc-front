@@ -1,8 +1,0 @@
-{
-  "name": "MyShop API",
-  "description": "Full-stack e-commerce platform API",
-  "buildCommand": "dotnet publish -c Release -o out",
-  "startCommand": "dotnet out/Myshop.Api.dll",
-  "enviroment": "production",
-  "port": 8080
-}
